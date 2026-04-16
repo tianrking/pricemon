@@ -9,6 +9,25 @@
 
 当前支持 **Alibaba.com** 和 **Amazon.com**，架构可扩展其他网站。
 
+## 30 秒上手
+
+```bash
+# 1. 克隆
+git clone https://github.com/tianrking/pricemon.git
+cd pricemon
+
+# 2. 安装依赖
+uv sync
+
+# 3. 抓取（不需要 Cookie 也能跑）
+uv run pricemon --site amazon -k "servo motor"
+uv run pricemon --site alibaba -k "DM4340 motor"
+
+# 结果保存在 results/ 目录，JSON 格式
+```
+
+> 没有 Cookie 也能用，部分网站可能弹验证码，手动过一下就行。带 Cookie 更稳定。
+
 ## 前置依赖
 
 - **Python 3.8+**
