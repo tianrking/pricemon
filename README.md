@@ -4,6 +4,12 @@
 
 当前支持 **Alibaba.com** 和 **Amazon.com**，架构可扩展其他网站。
 
+## 前置依赖
+
+- **Python 3.8+**
+- **Chrome / Chromium** 浏览器
+- **DrissionPage**（随 pricemon 自动安装，也可手动安装：`uv pip install DrissionPage`）
+
 ## 安装
 
 ### 使用 uv（推荐）
@@ -243,12 +249,12 @@ git push origin v0.3.0
 - `TESTPYPI_API_TOKEN`
 - `PYPI_API_TOKEN`
 
-## 依赖
+## 示例结果
 
-- Python 3.8+
-- DrissionPage >= 4.0
-- Chrome / Chromium 浏览器
-- Linux / macOS / Windows
+| 网站 | 文件 | 产品数 |
+|------|------|--------|
+| Alibaba | [results/examples/alibaba_servo_motor.json](results/examples/alibaba_servo_motor.json) | 5 条示例 |
+| Amazon | [results/examples/amazon_servo_motor.json](results/examples/amazon_servo_motor.json) | 5 条示例 |
 
 ## 常见问题
 
