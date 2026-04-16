@@ -7,7 +7,7 @@ name = "pricemon"
 version = "0.2.0"
 description = "通用价格监控工具 — 基于 DrissionPage 的多网站产品价格抓取"
 readme = "README.md"
-license = {text = "Custom Non-Commercial"}
+license = "LicenseRef-Custom-NonCommercial"
 requires-python = ">=3.8"
 authors = [
     {name = "tianrking", email = "tian.r.king@gmail.com"},
@@ -16,7 +16,6 @@ keywords = ["price", "monitor", "scraper", "alibaba", "amazon", "drissionpage", 
 classifiers = [
     "Development Status :: 4 - Beta",
     "Intended Audience :: Developers",
-    "License :: Free For Educational Use",
     "Operating System :: OS Independent",
     "Programming Language :: Python :: 3",
     "Programming Language :: Python :: 3.8",
