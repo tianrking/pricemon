@@ -1,5 +1,10 @@
 # pricemon
 
+[![PyPI](https://img.shields.io/pypi/v/pricemon?color=blue&label=PyPI)](https://pypi.org/project/pricemon/)
+[![Python](https://img.shields.io/badge/Python-3.8%2B-blue.svg)](https://www.python.org/)
+[![License](https://img.shields.io/badge/License-Non--Commercial-green.svg)](LICENSE)
+[![GitHub release](https://img.shields.io/github/v/tag/tianrking/pricemon?label=release&color=orange)](https://github.com/tianrking/pricemon/releases)
+
 通用价格监控工具 — 基于 DrissionPage 的多网站产品价格抓取。
 
 当前支持 **Alibaba.com** 和 **Amazon.com**，架构可扩展其他网站。
@@ -238,8 +243,8 @@ uv publish --index testpypi
 uv publish
 
 # 或者用 git tag 触发 CI 自动发布
-git tag v0.3.0
-git push origin v0.3.0
+git tag v0.0.2
+git push origin v0.0.2
 ```
 
 ### CI 自动发布

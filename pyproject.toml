@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "pricemon"
-version = "0.2.0"
+version = "0.0.1"
 description = "通用价格监控工具 — 基于 DrissionPage 的多网站产品价格抓取"
 readme = "README.md"
 license = "LicenseRef-Custom-NonCommercial"
