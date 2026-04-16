@@ -10,9 +10,9 @@ readme = "README.md"
 license = {text = "Custom Non-Commercial"}
 requires-python = ">=3.8"
 authors = [
-    {name = "pricemon contributors"},
+    {name = "tianrking", email = "tian.r.king@gmail.com"},
 ]
-keywords = ["price", "monitor", "scraper", "alibaba", "drissionpage", "automation"]
+keywords = ["price", "monitor", "scraper", "alibaba", "amazon", "drissionpage", "automation"]
 classifiers = [
     "Development Status :: 4 - Beta",
     "Intended Audience :: Developers",
@@ -42,9 +42,9 @@ dev = [
 pricemon = "pricemon.cli:main"
 
 [project.urls]
-Homepage = "https://github.com/user/pricemon"
-Repository = "https://github.com/user/pricemon"
-Documentation = "https://github.com/user/pricemon#readme"
+Homepage = "https://github.com/tianrking/pricemon"
+Repository = "https://github.com/tianrking/pricemon"
+Documentation = "https://github.com/tianrking/pricemon#readme"
 
 [tool.setuptools.packages.find]
 include = ["pricemon*"]

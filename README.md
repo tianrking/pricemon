@@ -2,7 +2,7 @@
 
 通用价格监控工具 — 基于 DrissionPage 的多网站产品价格抓取。
 
-当前支持 Alibaba.com，架构可扩展其他网站。
+当前支持 **Alibaba.com** 和 **Amazon.com**，架构可扩展其他网站。
 
 ## 安装
 
@@ -21,7 +21,7 @@ pricemon -c cookies.txt -k "DM4340 servo motor"
 ### 从源码安装
 
 ```bash
-git clone https://github.com/user/pricemon.git
+git clone https://github.com/tianrking/pricemon.git
 cd pricemon
 pip install -e .
 ```
@@ -29,7 +29,7 @@ pip install -e .
 ### 也可直接运行
 
 ```bash
-git clone https://github.com/user/pricemon.git
+git clone https://github.com/tianrking/pricemon.git
 cd pricemon
 python pricemon.py -c cookies.txt -k "关键词"
 ```
@@ -49,8 +49,11 @@ python pricemon.py -c cookies.txt -k "关键词"
 ### 2. 运行抓取
 
 ```bash
-# 基本用法
+# Alibaba（默认）
 pricemon -c cookies.txt -k "DM4340 servo motor"
+
+# Amazon
+pricemon --site amazon -k "servo motor"
 
 # 无头模式
 pricemon -c cookies.txt --headless -k "brushless motor"
@@ -75,7 +78,7 @@ pricemon -c cookies.txt -k "servo motor" --compare results/
 | `-c` / `--cookie-file` | Cookie 文件路径 | `-c cookies.txt` |
 | `-k` / `--keyword` | 搜索关键词（默认 "DM motor servo"） | `-k "brushless DC motor"` |
 | `-p` / `--pages` | 抓取页数（默认 1） | `-p 3` |
-| `--site` | 目标网站（默认 alibaba） | `--site alibaba` |
+| `--site` | 目标网站，支持 alibaba / amazon（默认 alibaba） | `--site amazon` |
 | `--headless` | 无头模式，不显示浏览器 | |
 | `--details` | 获取产品详情页规格参数 | |
 | `--compare` | 历史数据目录，对比价格变化 | `--compare results/` |
@@ -135,12 +138,22 @@ pricemon -c cookies.txt -k "DM4340 motor" -p 1 --compare results/
 
 ## 抓取能力
 
+### Alibaba.com
+
 | 页数 | 产品数 | 耗时 |
 |------|--------|------|
 | 1 页 | 48 个 | ~15秒 |
 | 3 页 | 144 个 | ~40秒 |
 | 10 页 | 480 个 | ~2分钟 |
 | 50 页 | 2,400 个 | ~8分钟 |
+
+### Amazon.com
+
+| 页数 | 产品数 | 耗时 |
+|------|--------|------|
+| 1 页 | 50 个 | ~15秒 |
+| 3 页 | 150 个 | ~40秒 |
+| 10 页 | 500 个 | ~2分钟 |
 
 ## 扩展新网站
 
@@ -199,7 +212,8 @@ pricemon/
     └── scrapers/           # 抓取器（可扩展）
         ├── __init__.py     # 注册表
         ├── base.py         # BaseScraper 抽象基类
-        └── alibaba.py      # Alibaba 实现
+        ├── alibaba.py      # Alibaba 实现
+        └── amazon.py       # Amazon 实现
 ```
 
 ## 发布新版本
