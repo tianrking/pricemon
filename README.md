@@ -6,50 +6,40 @@
 
 ## 安装
 
-### 从 PyPI 安装（推荐）
+### 使用 uv（推荐）
+
+```bash
+uv pip install pricemon
+```
+
+或从源码安装：
+
+```bash
+git clone https://github.com/tianrking/pricemon.git
+cd pricemon
+uv pip install -e .
+```
+
+### 使用 pip
 
 ```bash
 pip install pricemon
 ```
 
-安装后可直接使用 `pricemon` 命令：
-
-```bash
-pricemon -c cookies.txt -k "DM4340 servo motor"
-```
-
-### 从源码安装
+### 直接运行
 
 ```bash
 git clone https://github.com/tianrking/pricemon.git
 cd pricemon
-pip install -e .
-```
-
-### 也可直接运行
-
-```bash
-git clone https://github.com/tianrking/pricemon.git
-cd pricemon
-python pricemon.py -c cookies.txt -k "关键词"
+uv run python pricemon.py -c cookies.txt -k "关键词"
 ```
 
 ## 快速开始
 
-### 1. 获取 Cookie（推荐）
-
-脚本在匿名访问时可能被网站验证码拦截。提供 Cookie 可大幅提高成功率。
-
-1. 用浏览器（任何设备）打开目标网站并登录
-2. 按 `F12` → **Console** → 输入 `document.cookie` 回车
-3. 复制输出的字符串，保存到文件 `cookies.txt`
-
-也可用浏览器扩展 [Cookie-Editor](https://chrome.google.com/webstore/detail/cookie-editor/hlkenndednhfkekhgcdicdfddnkalmdm) 导出 JSON 格式。
-
-### 2. 运行抓取
+### 1. 运行抓取
 
 ```bash
-# Alibaba（默认）
+# Alibaba（默认），带 Cookie
 pricemon -c cookies.txt -k "DM4340 servo motor"
 
 # Amazon
@@ -64,18 +54,27 @@ pricemon -c cookies.txt -k "servo motor" -p 5
 # 获取详情页规格
 pricemon -c cookies.txt --details -k "DM4340"
 
-# 匿名访问（可能触发验证码）
-pricemon -k "servo motor"
-
 # 价格对比
 pricemon -c cookies.txt -k "servo motor" --compare results/
 ```
+
+不提供 Cookie 也可以运行，但部分网站可能会弹出验证码，需要手动通过一次。
+
+### 2. 获取 Cookie（可选但推荐）
+
+提供 Cookie 可以大幅提高成功率，避免验证码拦截。
+
+1. 用浏览器打开目标网站并登录
+2. 按 `F12` → **Console** → 输入 `document.cookie` 回车
+3. 复制输出的字符串，保存到文件 `cookies.txt`
+
+也可用浏览器扩展 [Cookie-Editor](https://chrome.google.com/webstore/detail/cookie-editor/hlkenndednhfkekhgcdicdfddnkalmdm) 导出 JSON 格式。
 
 ## 参数说明
 
 | 参数 | 说明 | 示例 |
 |------|------|------|
-| `-c` / `--cookie-file` | Cookie 文件路径 | `-c cookies.txt` |
+| `-c` / `--cookie-file` | Cookie 文件路径（可选） | `-c cookies.txt` |
 | `-k` / `--keyword` | 搜索关键词（默认 "DM motor servo"） | `-k "brushless DC motor"` |
 | `-p` / `--pages` | 抓取页数（默认 1） | `-p 3` |
 | `--site` | 目标网站，支持 alibaba / amazon（默认 alibaba） | `--site amazon` |
@@ -160,34 +159,32 @@ pricemon -c cookies.txt -k "DM4340 motor" -p 1 --compare results/
 在 `pricemon/scrapers/` 下新建文件：
 
 ```python
-# pricemon/scrapers/amazon.py
+# pricemon/scrapers/ebay.py
 from .base import BaseScraper
 from ..models import Product
 
-class AmazonScraper(BaseScraper):
-    name = "amazon"
-    domain = ".amazon.com"
-    site_url = "https://www.amazon.com"
+class EbayScraper(BaseScraper):
+    name = "ebay"
+    domain = ".ebay.com"
+    site_url = "https://www.ebay.com"
 
     def search(self, keyword, page=1) -> list[Product]:
-        # 实现搜索逻辑
         ...
 
     def fetch_detail(self, product_url) -> dict:
-        # 实现详情获取
         ...
 ```
 
 在 `scrapers/__init__.py` 注册：
 
 ```python
-_register(AmazonScraper)
+_register(AlibabaScraper, AmazonScraper, EbayScraper)
 ```
 
 使用：
 
 ```bash
-pricemon --site amazon -c cookies.txt -k "servo motor"
+pricemon --site ebay -c cookies.txt -k "servo motor"
 ```
 
 ## 项目结构
@@ -224,15 +221,13 @@ pricemon/
 #    pyproject.toml 中的 version
 
 # 2. 构建
-pip install build
-python -m build
+uv build
 
 # 3. 发布到 TestPyPI
-pip install twine
-twine upload --repository testpypi dist/*
+uv publish --repository testpypi
 
 # 4. 确认无误后发布到 PyPI
-twine upload dist/*
+uv publish
 
 # 或者用 git tag 触发 CI 自动发布
 git tag v0.3.0
@@ -259,7 +254,9 @@ git push origin v0.3.0
 
 ### Q: 遇到验证码
 
-Cookie 过期。重新登录目标网站，获取新 `document.cookie`，更新 `cookies.txt`。
+Cookie 过期或未提供 Cookie。两种解决方式：
+- **推荐**：重新登录目标网站，获取新 `document.cookie`，更新 `cookies.txt`
+- **不提供 Cookie**：不使用 `--headless`，手动通过验证码后继续
 
 ### Q: 抓取结果为 0
 
