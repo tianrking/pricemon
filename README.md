@@ -8,22 +8,24 @@
 
 - **Python 3.8+**
 - **Chrome / Chromium** 浏览器
-- **DrissionPage**（随 pricemon 自动安装，也可手动安装：`uv pip install DrissionPage`）
+- **DrissionPage** — `uv add DrissionPage` 或 `pip install DrissionPage`
+
+> pricemon 依赖 DrissionPage，安装 pricemon 时会自动安装。
 
 ## 安装
 
 ### 使用 uv（推荐）
 
 ```bash
-uv pip install pricemon
+uv add pricemon
 ```
 
-或从源码安装：
+从源码安装：
 
 ```bash
 git clone https://github.com/tianrking/pricemon.git
 cd pricemon
-uv pip install -e .
+uv sync
 ```
 
 ### 使用 pip
@@ -32,12 +34,12 @@ uv pip install -e .
 pip install pricemon
 ```
 
-### 直接运行
+### 直接运行（无需安装）
 
 ```bash
 git clone https://github.com/tianrking/pricemon.git
 cd pricemon
-uv run python pricemon.py -c cookies.txt -k "关键词"
+uv run pricemon -c cookies.txt -k "关键词"
 ```
 
 ## 快速开始
@@ -226,11 +228,11 @@ pricemon/
 #    pricemon/config.py 中的 VERSION
 #    pyproject.toml 中的 version
 
-# 2. 构建
+# 2. 构建跨平台 wheel
 uv build
 
 # 3. 发布到 TestPyPI
-uv publish --repository testpypi
+uv publish --index testpypi
 
 # 4. 确认无误后发布到 PyPI
 uv publish
