@@ -1,0 +1,16 @@
+__pycache__/
+*.pyc
+*.pyo
+results/
+cookies.txt
+cookies.json
+*.egg-info/
+dist/
+build/
+.venv/
+.idea/
+.vscode/
+*.swp
+*.swo
+.DS_Store
+Thumbs.db

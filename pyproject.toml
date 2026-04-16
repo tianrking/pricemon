@@ -1,0 +1,53 @@
+[build-system]
+requires = ["setuptools>=68.0", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "pricemon"
+version = "0.2.0"
+description = "通用价格监控工具 — 基于 DrissionPage 的多网站产品价格抓取"
+readme = "README.md"
+license = {text = "Custom Non-Commercial"}
+requires-python = ">=3.8"
+authors = [
+    {name = "pricemon contributors"},
+]
+keywords = ["price", "monitor", "scraper", "alibaba", "drissionpage", "automation"]
+classifiers = [
+    "Development Status :: 4 - Beta",
+    "Intended Audience :: Developers",
+    "License :: Free For Educational Use",
+    "Operating System :: OS Independent",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.8",
+    "Programming Language :: Python :: 3.9",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Topic :: Internet :: WWW/HTTP",
+    "Topic :: Office/Business :: Financial",
+]
+dependencies = [
+    "DrissionPage>=4.0",
+]
+
+[project.optional-dependencies]
+dev = [
+    "build",
+    "twine",
+    "pytest",
+]
+
+[project.scripts]
+pricemon = "pricemon.cli:main"
+
+[project.urls]
+Homepage = "https://github.com/user/pricemon"
+Repository = "https://github.com/user/pricemon"
+Documentation = "https://github.com/user/pricemon#readme"
+
+[tool.setuptools.packages.find]
+include = ["pricemon*"]
+
+[tool.setuptools.package-data]
+pricemon = ["py.typed"]
